@@ -13,3 +13,11 @@ after_success:
   - docker build -t swissjoshua/multi-nginx ./nginx
   - docker build -t swissjoshua/multi-api ./api
   - docker build -t swissjoshua/multi-worker ./worker
+
+  # Log in to the Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push to Docker Hub
+  - docker push swissjoshua/multi-client
+  - docker push swissjoshua/multi-nginx
+  - docker push swissjoshua/multi-api
+  - docker push swissjoshua/multi-worker
